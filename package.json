@@ -1,6 +1,6 @@
 {
   "name": "hsencrypt",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Encrypt and decrypt strings using handshake names and their associated keys.",
   "main": "index.js",
   "repository": {
