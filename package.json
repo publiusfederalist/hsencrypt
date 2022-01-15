@@ -1,8 +1,12 @@
 {
   "name": "hsencrypt",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Encrypt and decrypt strings using handshake names and their associated keys.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/publiusfederalist/hsencrypt.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,5 +15,16 @@
   "dependencies": {
     "bcrypto": "^5.4.0",
     "hsd": "^3.0.1"
-  }
+  },
+  "keywords": [
+    "encryption",
+    "handshake",
+    "blockchain",
+    "ecdh",
+    "aes",
+    "decryption",
+    "encrypt",
+    "decrypt"
+  ],
+  "homepage": "https://github.com/publiusfederalist"
 }
