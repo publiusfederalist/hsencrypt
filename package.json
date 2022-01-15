@@ -1,0 +1,15 @@
+{
+  "name": "hsencrypt",
+  "version": "1.0.0",
+  "description": "Encrypt and decrypt strings using handshake names and their associated keys.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "publiusfederalist",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypto": "^5.4.0",
+    "hsd": "^3.0.1"
+  }
+}
