@@ -46,7 +46,9 @@ decrypt(wallet, node, passphrase, name, sender, ciphertext, iv)
 
 ## Example
 
-The following example assumes a folder `keys` includes files `node` and `wallet` with the associated api keys inside them.
+You can see it in action in [zmsg](https://github.com/publiusfederalist/zmsg).
+
+Also, feel free to try the following example which assumes a folder `keys` includes files `node` and `wallet` with the associated api keys inside them.
 
 ```
 #!/usr/bin/env node
