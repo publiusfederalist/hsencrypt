@@ -14,6 +14,36 @@ encrypt(wallet, node, passphrase, name, target, message)
 decrypt(wallet, node, passphrase, name, sender, ciphertext, iv)
 ```
 
+```
+** encrypt()
+**   wallet     - Wallet from hsd
+**   node       - Node from hsd
+**   passphrase - passphrase for wallet
+**   name       - my name
+**   target     - recipient's name
+**   message    - the message to encrypt
+**
+**   returns {ciphertext,iv}
+**     ciphertext - an AES encrypted message
+**     iv         - initialization vector for ciphertext
+**     or null
+```
+
+```
+** decrypt()
+**   wallet     - Wallet from hsd
+**   node       - Node from hsd
+**   passphrase - passphrase for wallet
+**   name       - my name
+**   sender     - sender's name
+**   ciphertext - the ciphertext
+**   iv         - the initialization vector
+**
+**   return string
+**     string containing the decrypted message
+**     or null
+```
+
 ## Example
 
 The following example assumes a folder `keys` includes files `node` and `wallet` with the associated api keys inside them.
