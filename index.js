@@ -48,7 +48,7 @@ async function decrypt(wallet, node, passphrase, name, sender, ciphertext, iv) {
   const keys = await getKeysFromName(wallet, node, passphrase, name);
   const senderPubkey = await getPubkeyFromName(node, sender);
   const secret = _ecdh(senderPubkey, keys.privateKey);
-  return _decrypt(ciphertext, iv, secret);
+  return _decrypt(ciphertext, iv, secret).toString();
 }
 
 /*
