@@ -48,7 +48,7 @@ decrypt(wallet, node, passphrase, name, sender, ciphertext, iv)
 
 You can see it in action in [zmsg](https://github.com/publiusfederalist/zmsg).
 
-Also, feel free to try the following example which assumes a folder `keys` includes files `node` and `wallet` with the associated api keys inside them.
+Also, feel free to try the following example which assumes a folder `keys` includes files `node` and `wallet` with the associated api keys inside them.  It also, of course, requires hsd, hs-client and consoleinout npms.
 
 ```
 #!/usr/bin/env node
@@ -57,22 +57,7 @@ const {WalletClient, NodeClient} = require('hs-client');
 const {Network} = require('hsd');
 const fs = require('fs');
 const network = Network.get('main');
-const readline = require('readline');
-const writable = require('stream').Writable;
-
-var mutable = new writable({
-  write: function(chunk, encoding, callback) {
-    if (!this.muted)
-      process.stdout.write(chunk, encoding);
-    callback();
-  }
-});
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: mutable,
-  terminal: true
-});
-mutable.muted = false;
+const ConsoleIO = new (require("consoleinout"))(console);
 
 const nodeOptions = {
   network: network.type,
@@ -103,11 +88,8 @@ let walletClient;
     process.exit(0);
   }
 
-  console.log("Enter Password:");
-  const it = rl[Symbol.asyncIterator]();
-  mutable.muted = true;
-  const password = (await it.next()).value
-  mutable.muted = false;
+  console.output("Enter Password: ");
+  const password = await console.input(true);
 
   if(argc==7) {
     let decrypted=await decrypt(walletClient, nodeClient, password, argv[4], argv[3], argv[5], argv[6]);
