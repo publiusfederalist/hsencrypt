@@ -73,8 +73,8 @@ async function getKeysFromName(wallet, node, passphrase, name) {
   let me, privWIF, privkey58, privkey, pubkey, _tmp;
   me = await getAddressFromName(node, name);
   privWIF = (await wallet.getWIF(me, passphrase)).privateKey;
-  privkey58 = base58.decode(privWIF).slice(1);
-  _tmp = new Buffer.alloc(privkey58.length - 5);
+  privkey58 = base58.decode(privWIF).slice(1);      // remove first byte
+  _tmp = new Buffer.alloc(privkey58.length - 5);    // remove last 4 bytes and compression byte
   privkey58.copy(_tmp, 0, 0, privkey58.length - 5);
   privkey58=_tmp;
   pubkey = secp256k1.publicKeyCreate(privkey58, true).toString('hex');
