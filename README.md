@@ -6,6 +6,10 @@ hsencrypt uses handshake names, a handshake node, and a handshake wallet to encr
 ## How to use
 
 ```
+npm install hsencrypt
+```
+
+```
 encrypt(wallet, node, passphrase, name, target, message) 
 decrypt(wallet, node, passphrase, name, sender, ciphertext, iv)
 ```
