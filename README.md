@@ -1,7 +1,7 @@
 # hsencrypt
 ## nodejs library to encrypt or decrypt messages using handshake names
 
-hsencrypt uses handshake names, a handshake node, and a handshake wallet to encrypt and decrypt names
+hsencrypt uses handshake names, a handshake node, and a handshake wallet to encrypt and decrypt names.
 
 ## How to use
 
@@ -11,7 +11,7 @@ npm install hsencrypt
 
 ```
 encrypt(wallet, node, passphrase, name, target, message) 
-decrypt(wallet, node, passphrase, name, sender, ciphertext, iv)
+decrypt(wallet, node, passphrase, name, sender, ciphertext)
 ```
 
 ```
@@ -23,23 +23,22 @@ decrypt(wallet, node, passphrase, name, sender, ciphertext, iv)
 **   target     - recipient's name
 **   message    - the message to encrypt
 **
-**   returns {ciphertext,iv}
-**     ciphertext - an AES encrypted message
-**     iv         - initialization vector for ciphertext
+**   returns pubKey+ciphertext
+**     pubKey     - an ephemeral public key
+**     ciphertext - an AEAD encrypted message (chacha20 x poly1305)
 **     or null
 ```
 
 ```
 ** decrypt()
-**   wallet     - Wallet from hsd
-**   node       - Node from hsd
-**   passphrase - passphrase for wallet
-**   name       - my name
-**   sender     - sender's name
-**   ciphertext - the ciphertext
-**   iv         - the initialization vector
+**   wallet          - Wallet from hsd
+**   node            - Node from hsd
+**   passphrase      - passphrase for wallet
+**   name            - my name
+**   sender          - sender's name
+**   ciphertext      - ephemeralPubKey + the ciphertext
 **
-**   return string
+**   returns
 **     string containing the decrypted message
 **     or null
 ```
@@ -79,7 +78,7 @@ let walletClient;
   if(argc!=6 && argc!=7) {
     console.log("Encrypt Usage: ",argv[1],"<wallet>","<from>","<to>","\"<msg>\"");
     console.log("");
-    console.log("Decrypt Usage: ",argv[1],"<wallet>","<from>","<to>","\"<encrypted-msg>\"","\"<IV>\"");
+    console.log("Decrypt Usage: ",argv[1],"<wallet>","<from>","<to>","\"<encrypted-msg>\"", "\"d\"");
     process.exit();
   }
   walletClient = _walletClient.wallet(argv[2]);
@@ -92,18 +91,16 @@ let walletClient;
   const password = await console.input(true);
 
   if(argc==7) {
-    let decrypted=await decrypt(walletClient, nodeClient, password, argv[4], argv[3], argv[5], argv[6]);
+    let decrypted=await decrypt(walletClient, nodeClient, password, argv[4], argv[3], argv[5]);
     console.log("Decrypted: ",decrypted);
     process.exit(0);
   }
   else if(argc==6) {
     let encrypted=await encrypt(walletClient, nodeClient, password, argv[3], argv[4], argv[5]);
-    console.log("Encrypted: ",encrypted.cyphertext);
-    console.log("IV: ",encrypted.iv);
+    console.log(encrypted);
     process.exit(0);
   }
 })()
-
 ```
 
 ## Learn More
