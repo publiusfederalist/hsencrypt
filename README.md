@@ -1,7 +1,9 @@
 # hsencrypt
 ## nodejs library to encrypt or decrypt messages using handshake names
 
-hsencrypt uses handshake names, a handshake node, and a handshake wallet to encrypt and decrypt names.
+hsencrypt uses handshake names, a handshake node, and a handshake wallet to encrypt and decrypt names.  Using ephemeral keys instead of the original implementation of hsencrypt which used only the static keys, we are able to gain some benefits.
+
+Instead of requiring long term secrecy of two private keys (sender and receiver), the new implementation only requires a long term private key of the receiver.
 
 ## How to use
 
