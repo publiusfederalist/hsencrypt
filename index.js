@@ -90,7 +90,7 @@ async function getKeysFromName(wallet, node, passphrase, name) {
 ** bcrypto routine wrappers
 */
 function _decrypt(msg, key) {
-  if(msg.length<=32)
+  if(msg.length<32)
     return null;
   let _msg = Buffer.from(msg.substr(0,msg.length-32),'hex');
   let _tag = msg.substr(msg.length-32);
